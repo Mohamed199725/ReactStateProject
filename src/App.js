@@ -30,12 +30,19 @@ class App extends Component {
     clearInterval(this.intervalId);
   }
 
-  // this is the toggleshow function to be called later in the app
+  setMountTime = () => {
+    this.setState({
+      mountTime: new Date(),
+    });
+  };
+
   toggleShow = () => {
+    this.setMountTime(); // Update mountTime when Toggle Profile is clicked
     this.setState((prevState) => ({
       show: !prevState.show,
     }));
   };
+  
 
   render() {
     const { person, show, mountTime } = this.state;
@@ -43,9 +50,7 @@ class App extends Component {
     return (
       <div>
         <h1 className='title-container'>Stateful Component</h1>
-        <p>
-          <span className="time-since-mount-text">Time since mount:</span> {Math.floor((new Date() - mountTime) / 1000)}{/*calculating the time elapsed since the component was mounted */} seconds
-        </p>
+       
         <button className="custom-button" onClick={this.toggleShow}>
           Toggle Profile
         </button>
@@ -57,6 +62,9 @@ class App extends Component {
             <p>
               <span className="profession-label">Profession:</span> {person.profession}
             </p>
+            <p>
+          <span className="time-since-mount-text">Time since mount:</span> {Math.floor((new Date() - mountTime) / 1000)}{/*calculating the time elapsed since the component was mounted */} seconds
+        </p>
           </div>
         )}
       </div>
